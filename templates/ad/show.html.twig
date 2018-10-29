@@ -18,6 +18,9 @@
 
     <div class="container">
         <div class="row">
+
+
+        
            <div class="col-md-8 mb-3">
                 {{ ad.content | raw }}
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -29,7 +32,11 @@
                     <div class="carousel-inner">
                         {% for image in ad.images %}
                             <div class="carousel-item {% if loop.first %}active{% endif %}">
-                            <img class="d-block w-100" src="{{ image.url }}" alt="First slide">
+                                <img class="d-block w-100" src="{{ image.url }}" alt="First slide">
+                                <div class="carousel-caption d-none d-md-block">
+                                    <h5>{{ ad.title }}</h5>
+                                    <p>{{ image.caption }}</p>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
@@ -55,7 +62,7 @@
                 </div>
                 {{ "<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis, assumenda. Eligendi sed molestias dolores! Corporis vitae minima sit quas officiis!</p>
                 <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis, assumenda. Eligendi sed molestias dolores! Corporis vitae minima sit quas officiis!</p>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis, assumenda. Eligendi sed molestias dolores! Corporis vitae minima sit quas officiis!</p>" | raw}}
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quis, assumenda. Eligendi sed molestias dolores! Corporis vitae minima sit quas officiis!</p>" | raw }}
            </div> 
         </div>
     </div>
