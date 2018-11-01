@@ -24,7 +24,6 @@ class AdController extends AbstractController
         //plus besoin grace à l'injection de dependance dans la fonction index-- $repo = $this->getDoctrine()->getRepository(Ad::class);
 
         
-
         $ads = $repo->findAll();
 
         return $this->render('ad/index.html.twig', [
@@ -57,6 +56,8 @@ class AdController extends AbstractController
                 $image->setAd($ad);
                 $manager->persist($image);
             }
+
+            $ad->setAuthor($this->getUser());
 
             $manager->persist($ad);
             $manager->flush();
