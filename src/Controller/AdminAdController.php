@@ -66,7 +66,7 @@ class AdminAdController extends AbstractController
  */
     public function delete(Ad $ad, ObjectManager $manager) {
         if(count($ad->getBookings()) > 0) {
-            $this->adFlash(
+            $this->addFlash(
                 'warning',
                 "Vous ne pouvez pas supprimer cette annonce car elle possède déjà des réservations !"
             );
