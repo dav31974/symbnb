@@ -63,3 +63,9 @@ span.rating i {
 .hide-dav {
     display: none;
 }
+
+.testdav {
+    background-image: url(../img/homecover.jpg);
+    background-position: center;
+    background-size: cover;
+}

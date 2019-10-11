@@ -35,7 +35,7 @@ class AppFixtures extends Fixture
                   ->setLastName('Stephane')
                   ->setEmail('david31st@gmail.com')
                   ->setHash($this->encoder->encodePassword($adminUser, 'password'))
-                  ->setPicture('http://webskill.re/images/profil.png')
+                  ->setPicture('https://randomuser.me/api/portraits/men/50.jpg')
                   ->setIntroduction($faker->sentence())
                   ->setDescription('<p>' . join('</p><p>', $faker->paragraphs(3)) . '</p>')
                   ->addUserRole($adminRole);
