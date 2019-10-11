@@ -1,6 +1,6 @@
 # symbnb
 
-Application pouvant servir:
+Application de type airbnb pouvant servir:
  - aux voyageurs, afin de trouver un bien pour se loger durant leur séjour.
  - aux propriétaires de biens, afin de louer leur appartement ou maison à des voyageurs.
  
