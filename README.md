@@ -13,9 +13,9 @@ Framework utilisé: Symfony 4.1.6
 Base de donnée: MySQL
 
 INSTALLATION:
-- cloner le projet
-- installer les dépendances avec composer install
-- configurez votre base de donnée dans le fichier .env
-- lancer les migrations en tapant : php bin/console doctrine:migrations:migrate
-- lancez les fixtures en tapant : php bin/console doctrine:fixtures:load
-- lancez le serveur en tapant : php bin/console server:run
+- Clonez le projet
+- Installez les dépendances avec composer install
+- Configurez votre base de donnée dans le fichier .env
+- Lancer les migrations en tapant : php bin/console doctrine:migrations:migrate
+- Lancez les fixtures en tapant : php bin/console doctrine:fixtures:load
+- Lancez le serveur en tapant : php bin/console server:run
