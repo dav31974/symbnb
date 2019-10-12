@@ -181,8 +181,32 @@ class AccountController extends AbstractController
      *
      * @return Response
      */
-    public function bookings() {
-        return $this->render('account/bookings.html.twig');
+    public function bookings(ObjectManager $manager) {
+        // récupération de l'identifiant de l'user actuel et la date d'aujourdhui
+        $userId = $this->getUser()->getId();
+        $aujourdhui = date("Y-m-d H:i:s");
+
+        // réservation en cours ou à venir
+        $bookingsInProgress = $manager->createQuery('SELECT u FROM App\Entity\Booking u WHERE u.booker = :ident AND u.endDate > :hier ORDER BY u.endDate DESC');
+        $bookingsInProgress->setParameters(array(
+            'ident' => $userId,
+            'hier' => $aujourdhui
+        ));
+        $booksFutures = $bookingsInProgress->getResult();
+
+        // réservations passées
+        $bookingspast = $manager->createQuery('SELECT u FROM App\Entity\Booking u WHERE u.booker = :ident AND u.endDate < :hier ORDER BY u.endDate DESC');
+        $bookingspast->setParameters(array(
+            'ident' => $userId,
+            'hier' => $aujourdhui
+        ));
+        $booksAnciennes = $bookingspast->getResult();
+
+
+        return $this->render('account/bookings.html.twig', [
+            'booksFutures' => $booksFutures,
+            'booksAnciennes' => $booksAnciennes
+        ]);
     }
 
     

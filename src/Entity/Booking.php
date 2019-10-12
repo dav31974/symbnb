@@ -77,46 +77,35 @@ class Booking
         }
     }
 
-    public function isBookableDates() {
-        // 1) il faut connaitre les dates qui sont impossible pour l'annonce
+    public function isBookableDates()
+    {
+        // 1. Il faut connaitre les dates non réservables
         $notAvailableDays = $this->ad->getNotAvailableDays();
-        // 2) il faut comparer les dates choisies avec les dates impossibles
+        // 2. Il faut comparer avec les dates choisies
         $bookingDays = $this->getDays();
-
-        // Tableau des chaines de caractères de mes journées
-        $days = array_map(function($day){
+ 
+        $formatDay = function(\DateTime $day){
             return $day->format('Y-m-d');
-        }, $bookingDays);
-        
-        $notAvailable = array_map(function($day){
-            return $day->format('Y-m-d');
-        }, $notAvailableDays);
+        };
+ 
+        $notAvailable = array_map($formatDay, $notAvailableDays);
+        $days = array_map($formatDay, $bookingDays);
+ 
+        return ! (bool) array_intersect($notAvailable, $days);
+    } // End function isBookableDates
 
-        foreach($days as $day) {
-            if(array_search($day, $notAvailable) !== false) return false;
-        }
-        return true;
-
-    }
-
-    /**
-     * Permet de récuperer un tableau des journée qui correspondent à ma réservation
-     *
-     * @return array Un tableau  d'objet DateTime représentant les jours de la réservation
-     */
-    public function getDays() {
-        $resultat = range(
-            $this->startDate->getTimestamp(),
-            $this->endDate->getTimestamp(),
-            24 * 60 * 60
+    public function getDays()
+    {
+        // Intervalle de date d'une journée
+        $dateInterval = new \DateInterval('P1D');
+ 
+        $period = new \DatePeriod(
+            $this->startDate,
+            $dateInterval,
+            $this->endDate->add($dateInterval)
         );
-
-        $days = array_map(function($dayTimestamp) {
-            return new \DAteTime(date('Y-m-d', $dayTimestamp));
-        }, $resultat);
-
-        return $days;
-    }
+        return iterator_to_array($period);
+    } // End function getDays
 
     public function getDuration() {
         $diff= $this->endDate->diff($this->startDate);
